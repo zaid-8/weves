@@ -1,0 +1,3 @@
+Aethra Display Bold
+Custom geometric lettering drawn for AETHRA. Includes A E H M R S T and space.
+Use, modify and redistribute with this project. No external font download is required.
