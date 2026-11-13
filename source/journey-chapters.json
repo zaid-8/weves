@@ -1,0 +1,217 @@
+[
+  {
+    "name": [
+      "MARS TERRAIN",
+      "تضاريس المريخ"
+    ],
+    "tag": [
+      "EXPLORE YOUR DESTINATION",
+      "استكشف وجهتك"
+    ],
+    "media": "rocknest",
+    "description": [
+      "Begin with the landscape. Find a region on the globe, then explore its NASA mission records.",
+      "ابدأ بالتضاريس. اختر منطقة على الكوكب، ثم استكشف سجلات مهماتها من ناسا."
+    ],
+    "story": [
+      "NASA’s Curiosity panorama shows the rocky surface at Rocknest in Gale Crater. Use the globe to locate broad regions before opening the mission map. A photograph helps you understand a landscape; it cannot measure a safe walking corridor by itself.",
+      "تعرض بانوراما كيوريوسيتي من ناسا السطح الصخري في روكنست داخل فوهة غيل. استخدم الكوكب لتحديد المناطق العامة قبل فتح خريطة المهمات. تساعد الصورة على فهم المشهد، لكنها لا تقيس وحدها ممرًا آمنًا للمشي."
+    ],
+    "focus": [
+      "Choose a region",
+      "اختر منطقة"
+    ],
+    "action": [
+      "EXPLORE THE GLOBE",
+      "استكشف الكوكب"
+    ],
+    "steps": [
+      [
+        "Rotate and zoom the Mars globe.",
+        "دوّر كوكب المريخ وقرّبه."
+      ],
+      [
+        "Choose a destination and read its NASA reference.",
+        "اختر وجهة واقرأ مرجعها من ناسا."
+      ],
+      [
+        "Open the mission map to inspect the available records.",
+        "افتح خريطة المهمات لاستعراض السجلات المتاحة."
+      ]
+    ],
+    "source": "https://science.nasa.gov/resource/panoramic-view-from-rocknest-position-of-curiosity-mars-rover/",
+    "target": "explore"
+  },
+  {
+    "name": [
+      "PLAN YOUR WALK",
+      "خطّط مسارك"
+    ],
+    "tag": [
+      "BUILD A RETURN ROUTE",
+      "خطّط رحلة مع عودة"
+    ],
+    "media": "delta",
+    "description": [
+      "Place your base and science stops. Compare distance, walking time and your reserve before setting out.",
+      "حدّد القاعدة والمحطات العلمية. قارن المسافة ووقت المشي والاحتياط قبل الانطلاق."
+    ],
+    "story": [
+      "The Perseverance panorama shows the delta in Jezero Crater. In AETHRA, place waypoints on the Mars map and adjust walking speed, stop time and reserve. The draft estimates straight segments and a return along the same segments; it does not detect slopes, obstacles or suit limits.",
+      "تعرض بانوراما بيرسيفيرانس دلتا فوهة جيزيرو. في AETHRA، ضع نقاط المسار على خريطة المريخ وعدّل سرعة المشي ووقت التوقف والاحتياط. تقدّر المسودة قطعًا مباشرة وعودة على نفس القطع؛ ولا تكشف الانحدارات أو العوائق أو حدود البدلة."
+    ],
+    "focus": [
+      "Distance + time",
+      "المسافة والوقت"
+    ],
+    "action": [
+      "PLAN A MARSWALK",
+      "خطّط رحلة مشي"
+    ],
+    "steps": [
+      [
+        "Place a base and at least one stop on the map.",
+        "ضع قاعدة ومحطة واحدة على الأقل على الخريطة."
+      ],
+      [
+        "Set your pace, mission duration and reserve.",
+        "حدّد السرعة ومدة المهمة والاحتياط."
+      ],
+      [
+        "Review the return estimate and save your walk.",
+        "راجع تقدير العودة واحفظ مسارك."
+      ]
+    ],
+    "source": "https://science.nasa.gov/resource/jezero-craters-delta-is-getting-closer/",
+    "target": "walk"
+  },
+  {
+    "name": [
+      "SCIENCE STOPS",
+      "محطات علمية"
+    ],
+    "tag": [
+      "MAKE EACH STOP COUNT",
+      "اجعل لكل توقف هدفًا"
+    ],
+    "media": "jezero",
+    "description": [
+      "Follow Perseverance’s archived route in Jezero. Link your stops to evidence about Mars’ ancient water.",
+      "تتبّع مسار بيرسيفيرانس المؤرشف في جيزيرو، واربط محطاتك بأدلة المياه القديمة على المريخ."
+    ],
+    "story": [
+      "NASA identifies the delta remnant in this Perseverance image as evidence of an ancient river meeting a lake. Open the Jezero rover archive in AETHRA, inspect the available observations and choose science stops with a clear purpose. Archived coordinates are historical records, not a live position for an astronaut.",
+      "تصف ناسا بقايا الدلتا في صورة بيرسيفيرانس كدليل على التقاء نهر قديم ببحيرة. افتح سجل العربة في جيزيرو داخل AETHRA، وراجع المشاهدات المتاحة واختر محطات ذات هدف علمي واضح. الإحداثيات المؤرشفة سجلات تاريخية وليست موقعًا حيًا لرائد فضاء."
+    ],
+    "focus": [
+      "Evidence-led stops",
+      "محطات مرتبطة بالأدلة"
+    ],
+    "action": [
+      "OPEN JEZERO RECORDS",
+      "افتح سجل جيزيرو"
+    ],
+    "steps": [
+      [
+        "Open the Perseverance route archive.",
+        "افتح سجل مسار بيرسيفيرانس."
+      ],
+      [
+        "Inspect each record and its source before selecting a stop.",
+        "راجع كل سجل ومصدره قبل اختيار محطة."
+      ],
+      [
+        "Include observation and sampling time in the plan.",
+        "أدخل وقت الرصد وأخذ العينات ضمن الخطة."
+      ]
+    ],
+    "source": "https://science.nasa.gov/resource/perseverance-view-of-the-delta-in-jezero-crater/",
+    "target": "jezero"
+  },
+  {
+    "name": [
+      "LANDING LAB",
+      "مختبر الهبوط"
+    ],
+    "tag": [
+      "COMPARE YOUR OPTIONS",
+      "قارن خياراتك"
+    ],
+    "media": "global",
+    "description": [
+      "Enter vehicle dimensions, mass and fuel. Compare candidate landing sites and see the assumptions behind each result.",
+      "أدخل أبعاد المركبة وكتلتها ووقودها. قارن مواقع الهبوط وشاهد الافتراضات وراء كل نتيجة."
+    ],
+    "story": [
+      "NASA’s Mars missions demonstrate how demanding entry, descent and landing can be. AETHRA’s educational planner uses your vehicle specifications to compare approximate fuel, timing and site scores. Its simplified model is not NASA flight software and cannot certify a landing site or a crewed mission.",
+      "تُظهر مهمات ناسا إلى المريخ صعوبة الدخول والهبوط. يستخدم مخطط AETHRA التعليمي مواصفات مركبتك لمقارنة تقديرات الوقود والتوقيت ودرجات المواقع. النموذج المبسّط ليس برنامج طيران لناسا ولا يعتمد سلامة موقع هبوط أو مهمة مأهولة."
+    ],
+    "focus": [
+      "Fuel + site tradeoffs",
+      "مقارنة الوقود والمواقع"
+    ],
+    "action": [
+      "OPEN LANDING PLANNER",
+      "افتح مخطط الهبوط"
+    ],
+    "steps": [
+      [
+        "Enter dimensions, dry mass, fuel and engine Isp.",
+        "أدخل الأبعاد والكتلة الجافة والوقود وIsp المحرك."
+      ],
+      [
+        "Choose your priority and arrival preference.",
+        "حدّد أولويتك وتفضيل موعد الوصول."
+      ],
+      [
+        "Compare the top sites and read the model limits.",
+        "قارن أفضل المواقع واقرأ حدود النموذج."
+      ]
+    ],
+    "source": "https://science.nasa.gov/planetary-science/programs/mars-exploration/mission-timeline/how-we-land-on-mars/",
+    "target": "landing"
+  },
+  {
+    "name": [
+      "MISSION READY",
+      "جهّز مهمتك"
+    ],
+    "tag": [
+      "REHEARSE BEFORE YOU GO",
+      "تدرّب قبل الانطلاق"
+    ],
+    "media": "rocknest",
+    "description": [
+      "Prepare a mission with NOVA, review its assumptions and download a PDF for offline use.",
+      "حضّر مهمة مع نوفا، وراجع افتراضاتها ونزّل PDF للاستخدام دون اتصال."
+    ],
+    "story": [
+      "AETHRA combines NASA records with local educational calculations. NOVA can prepare a surface mission from your duration, crew and science goals, with an optional simplified landing scenario. Review every default and the limits of the data, then save the PDF and test your resources offline.",
+      "يجمع AETHRA سجلات ناسا وحسابات تعليمية محلية. يحضّر نوفا مهمة سطحية حسب المدة والطاقم والأهداف العلمية مع سيناريو هبوط مبسط اختياري. راجع الافتراضات وحدود البيانات، ثم احفظ PDF واختبر مواردك دون اتصال."
+    ],
+    "focus": [
+      "Offline preparation",
+      "الاستعداد دون اتصال"
+    ],
+    "action": [
+      "PLAN WITH NOVA",
+      "خطّط مع نوفا"
+    ],
+    "steps": [
+      [
+        "Tell NOVA your region, duration, crew and science goals.",
+        "حدّد لنوفا المنطقة والمدة والطاقم والأهداف العلمية."
+      ],
+      [
+        "Review the interpreted specifications and model defaults.",
+        "راجع المواصفات المفهومة وافتراضات النموذج."
+      ],
+      [
+        "Download the plan PDF from its message.",
+        "نزّل PDF الخطة من رسالتها."
+      ]
+    ],
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/",
+    "target": "nova"
+  }
+]

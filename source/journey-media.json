@@ -1,0 +1,23 @@
+{
+  "rocknest": {
+    "file": "mars-rocknest.jpg",
+    "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/downloadable_items/3/6/36567_PIA16453-FigA_sol6_from_Rocknest_raw.jpg?w=4800",
+    "source": "https://science.nasa.gov/resource/panoramic-view-from-rocknest-position-of-curiosity-mars-rover/",
+    "credit": "NASA/JPL-Caltech/Malin Space Science Systems",
+    "label": ["Gale Crater · Curiosity · Rocknest · raw color", "فوهة غيل · كيوريوسيتي · روكنست · ألوان الكاميرا الأصلية"]
+  },
+  "delta": {
+    "file": "mars-jezero-delta.jpg",
+    "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/resources/deepzooms/2/6/26676_PIA25212-web.jpg?w=4800",
+    "source": "https://science.nasa.gov/resource/jezero-craters-delta-is-getting-closer/",
+    "credit": "NASA/JPL-Caltech/ASU/MSSS",
+    "label": ["Jezero Crater · Perseverance · delta panorama", "فوهة جيزيرو · بيرسيفيرانس · بانوراما الدلتا"]
+  },
+  "jezero": {
+    "file": "mars-jezero-remnant.jpg",
+    "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/downloadable_items/4/5/45791_PIA24485_K4_ZCAM_main_sol004_Delta_Remnant_unannotated.jpg?w=1648",
+    "source": "https://science.nasa.gov/resource/perseverance-view-of-the-delta-in-jezero-crater/",
+    "credit": "NASA/JPL-Caltech/ASU/MSSS",
+    "label": ["Jezero Crater · Perseverance · delta remnant", "فوهة جيزيرو · بيرسيفيرانس · بقايا الدلتا"]
+  }
+}

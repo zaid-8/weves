@@ -1,0 +1,12 @@
+.nova-plan-message{max-width:100%;border:1px solid var(--line);padding:16px!important;background:var(--panel)!important}
+.nova-plan-title{display:block;font-size:18px;line-height:1.4;color:var(--fg)}
+.nova-plan-status{color:var(--accent);font-size:12px;line-height:1.7;margin:10px 0}
+.nova-plan-metrics{font-family:monospace;font-size:12px;line-height:1.7;color:var(--muted)}
+.nova-plan-actions{display:grid;gap:8px;margin:14px 0}.nova-plan-actions button{width:100%;padding:12px;white-space:normal;min-height:44px}
+.nova-plan-message details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.nova-plan-message summary{cursor:pointer;font-size:12px;line-height:1.7;padding:6px 0;color:var(--fg)}
+.nova-plan-message details>span{display:block;white-space:pre-wrap;font-size:13px;line-height:1.85;padding-top:12px;overflow-wrap:anywhere}
+.nova-plan-edit form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.nova-plan-edit label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--muted)}
+.nova-plan-edit input{width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;padding:9px;background:var(--bg);color:var(--fg)}
+.nova-plan-edit button{grid-column:1/-1;min-height:42px}.chat-prompts{flex-wrap:wrap}
+@media(max-width:420px){.nova-plan-edit form{grid-template-columns:1fr}.nova-plan-message{padding:12px!important}}

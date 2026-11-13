@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const ctx=vm.createContext({});vm.runInContext(fs.readFileSync('source/surface-map.js','utf8')+';this.SurfaceMap=SurfaceMap',ctx);const M=ctx.SurfaceMap;
+assert.equal(M.distance({lat:0,lon:0},{lat:0,lon:0}),0);
+const kmPerDegree=Math.PI*3390/180;assert(Math.abs(M.distance({lat:0,lon:0},{lat:0,lon:1})-kmPerDegree)<1e-9);
+assert(Math.abs(M.distance({lat:0,lon:179.9},{lat:0,lon:-179.9})-kmPerDegree*.2)<1e-8);
+assert(Math.abs(M.distance({lat:0,lon:0},{lat:0,lon:180})-Math.PI*3390)<1e-7);
+const pts=[{lat:18,lon:77},{lat:18.001,lon:77},{lat:18.002,lon:77}],a=M.analyze(pts,{speed:1.5,endurance:180,reserve:25,sampleTime:10});
+assert(Math.abs(a.distance-4*.001*kmPerDegree)<1e-8);assert.equal(a.scienceMinutes,20);assert.equal(a.available,135);assert(a.within);
+assert(!M.analyze([]).within);assert(!M.analyze([pts[0]]).within);assert(!M.analyze(pts,{speed:.2,endurance:15,reserve:75,sampleTime:120}).within);
+const map=Object.create(M.prototype);map.view={lon:179.99,lat:18,span:.05};
+const p={lon:-179.999,lat:18.001},xy=map.project(p),round=map.fromScreen(xy[0]/1440,xy[1]/720);assert(Math.abs(round.lon-p.lon)<1e-9);assert(Math.abs(round.lat-p.lat)<1e-9);
+map.view={lon:900,lat:100,span:500};map.constrain();assert.equal(map.view.lon,-180);assert.equal(map.view.lat,89.9);assert.equal(map.view.span,360);
+console.log('Surface map geometry passed: independent distance cases, dateline wrapping, return and dwell accounting, budgets, projection round-trip and view bounds.');

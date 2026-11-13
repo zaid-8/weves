@@ -1,0 +1,55 @@
+/* Educational model: NASA references supply physical context; site proxies and
+   scoring weights are AETHRA assumptions, never a landing certification. */
+const LANDING_SOURCES = {
+ atmosphere:{title:'NASA Glenn · Mars atmosphere',url:'https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/mars-atmosphere-equation-metric/'},
+ rocket:{title:'NASA Glenn · Ideal rocket equation',url:'https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/'},
+ time:{title:'NASA GISS · Mars24 algorithms',url:'https://www.giss.nasa.gov/tools/mars24/help/algorithm.html'},
+ transfer:{title:'NASA JPL · Calculating launch windows',url:'https://www.jpl.nasa.gov/edu/resources/lesson-plan/lets-go-to-mars-calculating-launch-windows/'},
+ cycle:{title:'NASA · Mars mission timeline',url:'https://science.nasa.gov/planetary-science/programs/mars-exploration/mission-timeline/'},
+ dust:{title:'NASA JPL · Seasonal dust storms',url:'https://www.jpl.nasa.gov/news/nasa-mars-orbiters-reveal-seasonal-dust-storm-pattern/'},
+ ice:{title:'NASA JPL · Arcadia water ice',url:'https://www.jpl.nasa.gov/news/nasas-treasure-map-for-water-ice-on-mars/'},
+ utopia:{title:'NASA JPL · Utopia buried ice',url:'https://www.jpl.nasa.gov/news/mars-ice-deposit-holds-as-much-water-as-lake-superior/'},
+ mer:{title:'NASA Ames · MOLA landing ellipses',url:'https://marsoweb.nas.nasa.gov/landingsites/mer2003/doc/site_ellipses_11_11_01.html'},
+ gale:{title:'NASA Ames · Gale elevation',url:'https://marsoweb.nas.nasa.gov/landingsites/msl/topsites/gale_crater/'},
+ jezero:{title:'NASA · Jezero / Perseverance',url:'https://science.nasa.gov/mission/mars-2020-perseverance/'},
+ hellas:{title:'NASA · Hellas banded terrain',url:'https://science.nasa.gov/photojournal/banded-terrain-in-hellas-planitia/'},
+ mola:{title:'NASA · Mars Trek / MOLA context',url:'https://trek.nasa.gov/mars/'},
+ facts:{title:'NASA · Mars facts',url:'https://science.nasa.gov/mars/facts/'}
+};
+// Regional representative points, not surveyed landing ellipses. Elevations are
+// rounded MOLA-context estimates; temperatures are illustrative surface bands.
+const LANDING_SITES = [
+ {id:'jezero',name:'Jezero Crater',ar:'فوهة جيزيرو',lat:18.44,lon:77.45,elevation:-2600,terrain:['Crater floor, delta scarps, dunes and rocks','أرضية فوهة وحواف دلتا وكثبان وصخور'],terrainRisk:55,ice:0,iceNote:['Ancient water evidence; accessible modern ice unverified here','أدلة ماء قديم؛ الجليد الحالي القابل للاستخراج غير متحقق هنا'],temp:[-90,0],sources:['jezero','mola']},
+ {id:'gale',name:'Gale Crater',ar:'فوهة غيل',lat:-4.58,lon:137.4,elevation:-4450,terrain:['Low crater floor; dunes, rocks and mountain slopes nearby','أرضية منخفضة؛ كثبان وصخور ومنحدرات قريبة'],terrainRisk:48,ice:0,iceNote:['Hydrated minerals are not an accessible ice reserve','المعادن المائية ليست مخزون جليد قابلًا للاستخراج'],temp:[-90,10],sources:['gale']},
+ {id:'gusev',name:'Gusev Crater',ar:'فوهة غوسيف',lat:-14.64,lon:175.06,elevation:-1920,terrain:['Volcanic plain, rocks and nearby hills','سهل بركاني وصخور وتلال قريبة'],terrainRisk:45,ice:0,iceNote:['No verified shallow ice at this representative point','لا يوجد جليد سطحي ضحل متحقق عند هذه النقطة'],temp:[-95,0],sources:['mer']},
+ {id:'meridiani',name:'Meridiani Planum',ar:'ميريدياني بلانوم',lat:-2.06,lon:-6.23,elevation:-1440,terrain:['Broad plains with ripples, soft soil and craters','سهول واسعة وتموجات وتربة رخوة وفوهات'],terrainRisk:32,ice:0,iceNote:['Past water evidence; shallow ice not established','أدلة ماء قديم؛ الجليد الضحل غير مثبت'],temp:[-90,5],sources:['mer']},
+ {id:'utopia',name:'Utopia Planitia',ar:'يوتوبيا بلانيتيا',lat:45,lon:83,elevation:-4000,terrain:['Northern plain with scalloped, polygonal ground','سهل شمالي بأرض متعرجة ومضلعة'],terrainRisk:50,ice:80,iceNote:['Regional buried ice evidence; depth and access vary','أدلة جليد مدفون إقليمية؛ العمق والوصول متغيران'],temp:[-120,-15],sources:['utopia','mola']},
+ {id:'arcadia',name:'Arcadia Planitia',ar:'أركاديا بلانيتيا',lat:40,lon:-170,elevation:-3500,terrain:['Northern plains; local fine dust and buried ice','سهول شمالية؛ غبار ناعم وجليد مدفون محليًا'],terrainRisk:43,ice:90,iceNote:['Regional shallow ice evidence, not a deposit survey at this pin','أدلة جليد ضحل إقليمية؛ ليست مسح مخزون عند العلامة'],temp:[-115,-10],sources:['ice','mola']},
+ {id:'hellas',name:'Hellas Basin',ar:'حوض هيلاس',lat:-42.4,lon:70.5,elevation:-7000,terrain:['Deep basin with varied floor, scarps and dust','حوض عميق بأرضية متباينة وحواف وغبار'],terrainRisk:72,ice:0,iceNote:['Accessible ice not established at this illustrative point','الجليد القابل للاستخراج غير مثبت عند هذه النقطة التوضيحية'],temp:[-115,0],sources:['hellas','mola']}
+];
+const LandingEngine = (()=>{
+ const DAY=86400000,G=3.72,G0=9.80665,SYNODIC=1/(1/365.256-1/686.98),ANCHOR=Date.parse('2020-07-30T12:00:00Z');
+ const weights={fuel:{fuel:.55,safety:.25,water:.1,solar:.1},safety:{fuel:.2,safety:.6,water:.1,solar:.1},water:{fuel:.15,safety:.25,water:.5,solar:.1},solar:{fuel:.15,safety:.25,water:.1,solar:.5}};
+ const defaults={length:8,width:8,height:5,dryMass:8000,fuel:5000,isp:320,crew:4,timing:'auto',date:'2027-07-01',priority:'safety',face:'belly',entrySpeed:6000,cd:1.5,angle:12,burnTime:45,cruiseDays:210};
+ const limits={length:[.5,60],width:[.5,60],height:[.5,60],dryMass:[100,500000],fuel:[0,1000000],isp:[100,500],crew:[0,20],entrySpeed:[5500,7000],cd:[1,2.5],angle:[5,25],burnTime:[20,120],cruiseDays:[180,300]};
+ const clamp=(x,a=0,b=100)=>Math.max(a,Math.min(b,x)),rad=x=>x*Math.PI/180,mod=x=>(x%360+360)%360;
+ function date(value){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return NaN;const ms=Date.parse(value+'T12:00:00Z');return Number.isFinite(ms)&&new Date(ms).toISOString().slice(0,10)===value?ms:NaN}
+ function validate(raw){const values={},errors=[];for(const [k,[min,max]]of Object.entries(limits)){const v=raw[k];const n=typeof v==='number'?v:typeof v==='string'&&v.trim()!==''?Number(v):NaN;if(!Number.isFinite(n)||n<min||n>max||(k==='crew'&&!Number.isInteger(n)))errors.push(k);else values[k]=n}for(const [k,allowed]of Object.entries({timing:['auto','date'],priority:Object.keys(weights),face:['belly','nose']})){if(!allowed.includes(raw[k]))errors.push(k);else values[k]=raw[k]}values.date=raw.date;if(raw.timing==='date'&&(!Number.isFinite(date(raw.date))||raw.date<'2020-01-01'||raw.date>'2045-12-31'))errors.push('date');return {values,errors}}
+ // Mars24 B1–B5 and D2; TT−UTC fixed at 69.184 s for this educational date range.
+ function season(ms){const d=ms/DAY+2440587.5+69.184/86400-2451545,M=19.3871+.52402073*d,cos=x=>Math.cos(rad(x)),sin=x=>Math.sin(rad(x));const p=[[.0071,2.2353,49.409],[.0057,2.7543,168.173],[.0039,1.1177,191.837],[.0037,15.7866,21.736],[.0021,2.1354,15.704],[.0020,2.4694,95.528],[.0018,32.8493,49.095]].reduce((s,[a,t,f])=>s+a*cos(.985626*d/t+f),0);const center=(10.691+3e-7*d)*sin(M)+.623*sin(2*M)+.05*sin(3*M)+.005*sin(4*M)+.0005*sin(5*M)+p,ls=mod(270.3871+.524038496*d+center),distance=1.52367934*(1.00436-.09309*cos(M)-.004336*cos(2*M)-.00031*cos(3*M)-.00003*cos(4*M));return {ls,distance,dusty:ls>=180,declination:Math.asin(.42565*sin(ls))+.25*rad(sin(ls))}}
+ // Daily-mean, horizontal top-of-atmosphere insolation. Not surface power output.
+ function solar(lat,s){const phi=rad(lat),delta=s.declination,h=Math.acos(clamp(-Math.tan(phi)*Math.tan(delta),-1,1));return Math.max(0,1361/(s.distance*s.distance)/Math.PI*(h*Math.sin(phi)*Math.sin(delta)+Math.cos(phi)*Math.cos(delta)*Math.sin(h)))}
+ function solarRange(lat){const vals=Array.from({length:24},(_,i)=>solar(lat,season(Date.UTC(2026,0,1)+i*686.98/24*DAY)));return [Math.min(...vals),Math.max(...vals)]}
+ function vehicle(v){const area=Math.PI/4*v.width*(v.face==='belly'?v.length:v.height),inertMass=v.dryMass+100*v.crew,wetMass=inertMass+v.fuel;return {area,inertMass,wetMass,beta:wetMass/(v.cd*area),volume:Math.PI/6*v.length*v.width*v.height,maxDV:v.isp*G0*Math.log(wetMass/inertMass)}}
+ // Isothermal approximation derived from NASA Glenn's pressure curve. Treat its
+ // zero height as MOLA datum; negative elevations are an explicitly stated extrapolation.
+ function atmosphere(z){const pressure=699*Math.exp(-.00009*z);return {pressure,density:pressure/(192.1*210)}}
+ // One-dimensional fixed-angle descent. Exact constant-density velocity-squared
+ // update within each altitude slab avoids Euler instability for very light craft.
+ function descent(v,site,veh,densityScale=1){let u=v.entrySpeed*v.entrySpeed,peakG=0;const sin=Math.sin(rad(v.angle)),end=site.elevation+1500;for(let z=125000;z>end;){const dh=Math.min(100,z-end),rho=atmosphere(z-dh/2).density*densityScale,k=rho/veh.beta,ds=dh/sin,decay=Math.exp(-k*ds);u=u*decay+(2*G*sin/k)*(-Math.expm1(-k*ds));peakG=Math.max(peakG,rho*u/(2*veh.beta*G0));z-=dh}const speed=Math.sqrt(u),deltaV=speed+G*v.burnTime+50,required=veh.wetMass*(-Math.expm1(-deltaV/(v.isp*G0)));return {speed,deltaV,required,peakG,braking:clamp(100*(1-speed/v.entrySpeed)),margin:v.fuel-required,enough:required<=v.fuel}}
+ function windowFor(ms){const n=Math.round((ms-ANCHOR)/(SYNODIC*DAY));return ANCHOR+n*SYNODIC*DAY}
+ function timing(v,now){if(v.timing==='date'){const arrival=date(v.date),launch=arrival-v.cruiseDays*DAY,center=windowFor(launch);return [{arrival,launch,center,offsetDays:(launch-center)/DAY,season:season(arrival),waitDays:0}]}const n=Math.max(0,Math.ceil((now-ANCHOR)/(SYNODIC*DAY)));return Array.from({length:4},(_,i)=>{const launch=ANCHOR+(n+i)*SYNODIC*DAY,arrival=launch+v.cruiseDays*DAY;return {launch,arrival,center:launch,offsetDays:0,season:season(arrival),waitDays:(launch-now)/DAY}})}
+ function evaluate(v,site,veh,time){const flight=descent(v,site,veh),sun=solar(site.lat,time.season),risk=clamp(.6*site.terrainRisk+(time.season.dusty?20:4)+(100-flight.braking)*.2),scores={fuel:clamp(100*(1-flight.required/veh.wetMass)),safety:100-risk,water:site.ice,solar:clamp(sun/250*100)},score=Object.entries(weights[v.priority]).reduce((n,[k,w])=>n+scores[k]*w,0);return {site,flight,time,sun,risk,scores,score}}
+ function plan(raw,now=Date.now()){const checked=validate(raw);if(checked.errors.length)throw new Error(checked.errors.join(','));const v=checked.values,veh=vehicle(v),times=timing(v,now);const results=LANDING_SITES.map(site=>{const options=times.map(time=>evaluate(v,site,veh,time));options.sort((a,b)=>(b.score-b.time.waitDays/365.25*.6)-(a.score-a.time.waitDays/365.25*.6));return options[0]});results.sort((a,b)=>Number(b.flight.enough)-Number(a.flight.enough)||b.score-a.score);const best=results.find(r=>r.flight.enough)||null;for(const r of results){const low=descent(v,r.site,veh,.75),high=descent(v,r.site,veh,1.25);r.fuelRange=[Math.min(low.required,high.required),Math.max(low.required,high.required)];r.solarRange=solarRange(r.site.lat)}return {input:v,vehicle:veh,results,best,times,weights:weights[v.priority],createdAt:new Date(now).toISOString()}}
+ return {defaults,limits,weights,validate,date,season,solar,solarRange,vehicle,atmosphere,descent,plan,timing,windowFor,G,G0,DAY,SYNODIC};
+})();

@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const c=vm.createContext({});vm.runInContext(['data.js','nasa-traverse.js','engine.js','mission-analysis.js','knowledge.js'].map(n=>fs.readFileSync('source/'+n,'utf8')).join('\n')+'\nthis.X={NASA_TRAVERSE,SITES,SOURCES,MarsEngine,knowledgeReply,MISSION_KNOWLEDGE};',c);const {NASA_TRAVERSE,SITES,SOURCES,MarsEngine,knowledgeReply}=c.X,r=NASA_TRAVERSE.records,o={speed:1.5,endurance:180,sampleTime:10,reserve:25};
+const p=MarsEngine.plan(r,0,[17,21],o);assert.equal(p.distance,2186.018);assert.equal(p.sampleMinutes,20);assert.equal(p.usableMinutes,135);assert(p.withinBudget);
+assert.equal(MarsEngine.plan(r,17,[0,21],o).distance,2186.018);
+assert.equal(MarsEngine.plan(r,0,[17,17,0],o).distance,1195.844);
+assert.equal(MarsEngine.plan(r,0,[],o).hasStops,false);
+assert.equal(MarsEngine.plan(r,0,[28],{...o,endurance:60}).withinBudget,false);
+assert.throws(()=>MarsEngine.plan(r,0,[99],o));assert.throws(()=>MarsEngine.plan(r,0,[17],{...o,speed:0}));assert.throws(()=>MarsEngine.plan(r,NaN,[17],o));
+for(let i=1;i<r.length;i++)assert(r[i].distance>=r[i-1].distance);
+for(const source of [...SOURCES,...SITES.map(s=>({url:s.url})),...r.map(s=>({url:s.panorama}))])assert(new URL(source.url).hostname.endsWith('.nasa.gov'));
+const ctx={plan:p,selected:SITES[0]},a=knowledgeReply('راجع مساري',ctx);assert.equal(a.topic,'route');assert(a.text.includes('2.19'));assert(knowledgeReply('وضح اكثر',ctx,a).text.includes('جرّب'));
+assert.equal(knowledgeReply('كيف اعرف موقعي بدون نت',ctx).topic,'navigation');assert.equal(knowledgeReply('hello',ctx).topic,'greeting');assert.equal(knowledgeReply('هل في حياة على المريخ',ctx).topic,'life');assert.equal(knowledgeReply('هل في طقس حالي',ctx).topic,'weather');assert.equal(knowledgeReply('احكي عن كيوريوسيتي',ctx).site,'gale');assert.equal(knowledgeReply('how to zoom',ctx).topic,'zoom');
+console.log('Engine and knowledge checks passed: observed distance arithmetic, return from middle, duplicates, limits, no fabricated observations, NASA-only sources, contextual dialogue.');
